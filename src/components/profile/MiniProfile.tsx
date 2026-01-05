@@ -45,19 +45,25 @@ export default function MiniProfile({
         method: "POST",
       });
 
+      let data = null;
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      }
+
       if (!res.ok) {
-        if (res.status === 400) {
-          showToast.error("자신을 차단할 수 없습니다.");
-          return;
+        // 서버 응답의 에러 코드 활용
+        if (data?.code === "BAN_MYSELF") {
+          throw new Error("자신을 차단할 수 없습니다.");
         }
-        showToast.error("유저 차단에 실패했습니다.");
+        throw new Error("유저 차단에 실패했습니다.");
       }
     },
     onSuccess: () => {
       showToast.success("유저를 차단했습니다.");
       queryClient.invalidateQueries({ queryKey: ["ban"] });
     },
-    onError: (error) => {
+    onError: (error: Error) => {
       showToast.error(error.message);
     },
   });
