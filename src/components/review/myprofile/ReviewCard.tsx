@@ -21,6 +21,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useReviewStore } from "@/stores/reviewStore";
 import { showToast } from "@/lib/toast";
 import { twMerge } from "tailwind-merge";
+import { ConfirmModal } from "@/components/common/ConfirmModal";
 
 type GameName = "lol" | "overwatch" | "valorant";
 
@@ -62,7 +63,9 @@ export default function ReviewCard({
   const router = useRouter();
   const qc = useQueryClient();
   const { setInitialData } = useReviewStore();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   // 작성한 리뷰만 토글 가능
   const isToggleable = mode === "sent";
@@ -93,43 +96,55 @@ export default function ReviewCard({
   };
 
   return (
-    <HorizontalCardContainer className={twMerge("", className)}>
+    <HorizontalCardContainer className={twMerge("w-full", className)}>
       <button
         type="button"
         onClick={handleToggle}
         disabled={!isToggleable}
-        className="flex w-full cursor-pointer items-center justify-between gap-3 text-left"
+        className="flex w-full cursor-pointer items-center justify-between gap-3 text-left max-lg:flex-col max-lg:items-start"
       >
         {/* 좌측 그룹 */}
-        <div className="flex flex-1 items-center gap-4">
+        <div className="flex min-w-0 items-center gap-3 max-lg:w-full max-lg:justify-between">
           {/* 게임 아이콘 */}
-          <div className="shrink-0">
+          <div className="flex min-w-0 items-center gap-3">
             <Image
               src={gameLogoSrc}
               alt={`${gameName} logo`}
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-md object-cover"
+              className="h-9 w-9 shrink-0 rounded-md object-cover"
             />
-          </div>
 
-          {/* 커뮤니티 닉네임 + 내용 */}
-          <div className="flex flex-1 items-center gap-4">
-            <div className="flex shrink-0 items-center gap-2">
-              <Avatar type="profile" src={profileImageURL} size="sm" />
-              <span className="text-content-primary text-sm">
+            {/* 커뮤니티 닉네임 + 내용 */}
+            <div className="flex min-w-0 items-center gap-2">
+              <Avatar type="profile" src={profileImageURL} size="xs" />
+
+              <span className="text-content-primary max-w-40 truncate text-sm">
                 {communityName}
               </span>
             </div>
+          </div>
 
-            <IntroduceBubble content={content} className="w-full" />
+          <div className="hidden max-lg:block">
+            <div className="h-6 w-6 shrink-0">
+              <Image
+                src={emotionSrc}
+                alt={`${emotion} emoji`}
+                className="object-contain"
+              />
+            </div>
           </div>
         </div>
 
         {/* 우측 그룹 */}
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="min-w-0 flex-1 max-lg:w-full">
+          <IntroduceBubble
+            content={content}
+            className="max-lg:truncate-none min-w-[clamp(180px,32vw,520px)] flex-1 truncate max-lg:line-clamp-2 max-lg:min-w-0"
+          />
+        </div>
+
+        <div className="flex shrink-0 items-center gap-3 max-lg:hidden">
           {/* 이모지 */}
-          <div className="relative h-6 w-6">
+          <div className="h-6 w-6 shrink-0">
             <Image
               src={emotionSrc}
               alt={`${emotion} emoji`}
@@ -138,8 +153,8 @@ export default function ReviewCard({
           </div>
 
           {/* 시간 + 화살표 */}
-          <div className="text-content-secondary flex w-15 items-center justify-end gap-1 text-xs">
-            <span>{formatRelativeTime(createdAt)}</span>
+          <div className="text-content-secondary flex w-24 items-center justify-end gap-1 text-xs">
+            <span className="shrink-0">{formatRelativeTime(createdAt)}</span>
             {isToggleable && (
               <span className="text-base">
                 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -147,13 +162,22 @@ export default function ReviewCard({
             )}
           </div>
         </div>
+
+        <div className="text-content-secondary hidden w-full items-center justify-end gap-1 text-xs max-lg:flex">
+          <span className="shrink-0">{formatRelativeTime(createdAt)}</span>
+          {isToggleable && (
+            <span className="text-base">
+              {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            </span>
+          )}
+        </div>
       </button>
 
       {/* 하단 수정/삭제 영역 (작성한 리뷰 + 펼쳐진 상태에서만) */}
       {isToggleable && isOpen && (
-        <div className="mt-3 flex justify-end gap-2">
+        <div className="mt-3 flex justify-end gap-2 max-lg:flex-col">
           <button
-            className="cursor-pointer rounded-xl bg-slate-500 px-4 py-1 text-sm text-white transition-all duration-150 hover:bg-slate-500/50"
+            className="cursor-pointer rounded-xl bg-slate-500 px-4 py-2 text-sm text-white transition-all duration-150 hover:bg-slate-500/50"
             onClick={() => {
               setInitialData({
                 nickName: communityName,
@@ -167,13 +191,32 @@ export default function ReviewCard({
             수정
           </button>
           <button
-            className="bg-negative hover:bg-negative/50 cursor-pointer rounded-xl px-4 py-1 text-sm text-white transition-all duration-150"
-            onClick={handleDelete}
+            className="bg-negative hover:bg-negative/50 cursor-pointer rounded-xl px-4 py-2 text-sm text-white transition-all duration-150"
+            onClick={async () => {
+              setConfirmModalOpen(true);
+            }}
           >
             삭제
           </button>
         </div>
       )}
+      <ConfirmModal
+        open={confirmModalOpen}
+        onOpenChange={setConfirmModalOpen}
+        title="정말 삭제하시겠습니까?"
+        description="삭제하면 다시 복구할 수 없습니다."
+        confirmText="삭제"
+        onConfirm={async () => {
+          await handleDelete();
+
+          await qc.invalidateQueries({
+            queryKey: ["writtenReviews"],
+          });
+
+          router.refresh();
+          router.push(`/myprofile/reviews`);
+        }}
+      />
     </HorizontalCardContainer>
   );
 }
