@@ -66,8 +66,10 @@ export default function BanPageContent() {
 
   return (
     <div className="flex flex-col">
-      <p className="text-content-main text-4xl font-bold">차단 목록</p>
-      <div className="mt-7.5">
+      <p className="text-content-main text-4xl font-bold max-md:hidden">
+        차단 목록
+      </p>
+      <div className="mt-7.5 max-md:mt-0">
         <p className="text-content-secondary text-center text-base">
           총 {optimisticBanList.length}명의 유저
         </p>
@@ -76,7 +78,7 @@ export default function BanPageContent() {
         {optimisticBanList.length > 0 && (
           <div className="border-border-primary mt-7.5 w-full overflow-hidden rounded-xl border text-base">
             {/* Header */}
-            <div className="text-content-secondary bg-bg-primary grid h-13 grid-cols-[270px_1fr] px-5 py-4">
+            <div className="text-content-secondary bg-bg-primary grid h-13 grid-cols-[180px_1fr] px-5 py-4">
               <span>차단일시</span>
               <span>대상 유저</span>
             </div>
@@ -86,7 +88,7 @@ export default function BanPageContent() {
               {optimisticBanList.map((ban) => (
                 <div
                   key={ban.userId}
-                  className="border-border-primary grid h-17 grid-cols-[270px_1fr_120px] items-center border-t px-5 py-4"
+                  className="border-border-primary grid h-17 grid-cols-[180px_1fr_120px] items-center border-t px-5 py-4"
                 >
                   <p className="text-content-secondary">
                     {formatDateToDash(ban.blockedAt)}
@@ -103,7 +105,8 @@ export default function BanPageContent() {
                   <BoxButton
                     tone="black"
                     text="해제"
-                    className="h-9 w-15.5 justify-self-end px-4 py-2 text-sm"
+                    className="h-9 justify-self-end text-sm"
+                    size="sm"
                     onClick={() => cancelBan(ban.userId)}
                   />
                 </div>
