@@ -72,7 +72,7 @@ export default function LoginForm() {
         {...register("email")}
         type="email"
         placeholder="이메일 주소"
-        className="outline-border-primary h-15 w-125 outline-1"
+        className="outline-border-primary h-15 w-125 outline-1 max-md:w-115 max-md:text-base"
       />
       {errors.email?.message && (
         <AuthErrorMsg message={errors.email?.message} />
@@ -82,24 +82,19 @@ export default function LoginForm() {
         type="password"
         name="password"
         placeholder="비밀번호"
-        className="outline-border-primary mt-4 mb-2 h-15 w-125 outline-1"
+        className="outline-border-primary mt-4 mb-2 h-15 w-125 outline-1 max-md:w-115 max-md:text-base"
       />
       {errors.password?.message && (
         <AuthErrorMsg message={errors.password?.message} className="my-1" />
       )}
-      <div className="flex flex-row gap-1 text-left text-base">
-        <p className="text-content-secondary ml-2">비밀번호를 잊으셨나요?</p>
-        <a href="#" className="text-accent hover:underline">
-          비밀번호 찾기
-        </a>
-      </div>
+
       {serverError && <AuthErrorMsg message={serverError} className="mt-2" />}
       <BoxButton
         type="submit"
         text={loading ? "로그인 중..." : "로그인"}
         tone="black"
         size="xl"
-        className="mt-5 text-xl font-bold"
+        className="mt-5 text-xl font-bold max-md:min-w-0"
         disabled={loading}
       />
     </form>
