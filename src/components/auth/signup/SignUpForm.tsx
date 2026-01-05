@@ -136,13 +136,16 @@ export default function SignUpForm() {
 
   return (
     <>
-      <form className="mt-12 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="mt-12 flex w-full flex-col max-md:mt-8"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex gap-3">
-          <div>
+          <div className="w-full">
             <TextInput
               {...register("email")}
               placeholder="이메일 주소"
-              className="outline-border-primary w-98 outline-1"
+              className="outline-border-primary w-98 outline-1 max-md:w-full max-md:text-base"
               readOnly={isCodeSent}
             />
             {errors.email?.message && (
@@ -173,7 +176,7 @@ export default function SignUpForm() {
           <TextInput
             {...register("code")}
             placeholder="이메일 주소로 받은 인증 번호"
-            className="outline-border-primary w-98 outline-1"
+            className="outline-border-primary w-98 outline-1 max-md:text-base"
             readOnly={isEmailVerified}
           />
           <BoxButton
@@ -218,7 +221,7 @@ export default function SignUpForm() {
           {...register("password")}
           type="password"
           placeholder="비밀번호"
-          className="outline-border-primary mt-3 mb-2 w-125 outline-1"
+          className="outline-border-primary mt-3 mb-2 w-125 outline-1 max-md:w-full max-md:text-base"
         />
         {errors.password?.message && (
           <AuthErrorMsg message={errors.password?.message} />
@@ -227,7 +230,7 @@ export default function SignUpForm() {
           {...register("passwordConfirm")}
           type="password"
           placeholder="비밀번호 확인"
-          className="outline-border-primary mt-3 w-125 outline-1"
+          className="outline-border-primary mt-3 w-125 outline-1 max-md:w-full max-md:text-base"
         />
         {errors.passwordConfirm?.message && (
           <AuthErrorMsg message={errors.passwordConfirm?.message} />
@@ -259,7 +262,12 @@ export default function SignUpForm() {
           )}
         </label>
 
-        <BoxButton text="회원가입" tone="color" size="xl" className="text-xl">
+        <BoxButton
+          text="회원가입"
+          tone="color"
+          size="xl"
+          className="text-xl max-md:w-full max-md:min-w-0"
+        >
           회원가입
         </BoxButton>
       </form>
