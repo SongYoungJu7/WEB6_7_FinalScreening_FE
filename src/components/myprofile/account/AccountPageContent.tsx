@@ -39,8 +39,8 @@ export default function AccountPageContent() {
     return <LoadingBouncy />;
   }
   return (
-    <div className="flex w-125 flex-col gap-11 [&_h3]:text-xl [&_h3]:font-semibold">
-      <h2 className="text-4xl font-bold">계정 관리</h2>
+    <div className="flex w-125 flex-col gap-11 max-lg:w-120 [&_h3]:text-xl [&_h3]:font-semibold">
+      <h2 className="text-4xl font-bold max-md:hidden">계정 관리</h2>
       <div className="flex flex-col gap-9">
         <div className="flex items-center gap-10">
           <ProfileImageSection
