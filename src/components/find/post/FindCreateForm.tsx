@@ -170,7 +170,7 @@ export default function FindCreateForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7.5">
-      <div className="flex items-center gap-7.5">
+      <div className="flex items-center gap-6.5">
         <FormLabelAndContent labelText="연동된 게임 아이디">
           <HorizontalCardContainer className="flex items-center gap-3 px-4 py-2">
             <Avatar
@@ -207,7 +207,7 @@ export default function FindCreateForm({
         </FormLabelAndContent>
       </div>
 
-      <div className="flex gap-7.5">
+      <div className="flex gap-6.5">
         <FormLabelAndContent labelText="게임 모드" labelFor="gameMode">
           <Controller
             control={control}
@@ -233,7 +233,7 @@ export default function FindCreateForm({
                     </div>
                   ),
                 }))}
-                className="min-w-50"
+                className="w-48.5"
               />
             )}
           />
@@ -259,7 +259,7 @@ export default function FindCreateForm({
                   value: t,
                   label: QUEUE_TYPES_LABEL[t],
                 }))}
-                className="min-w-50"
+                className="w-48"
               />
             )}
           />
@@ -272,7 +272,7 @@ export default function FindCreateForm({
         </FormLabelAndContent>
       </div>
 
-      <div className="flex gap-7.5">
+      <div className="flex gap-8">
         <div className="flex w-full flex-col gap-4">
           <FormLabelAndContent labelText="주 포지션">
             <Controller
@@ -343,6 +343,7 @@ export default function FindCreateForm({
                   value: String(n),
                   label: String(n),
                 }))}
+                className="w-47"
               />
             )}
           />

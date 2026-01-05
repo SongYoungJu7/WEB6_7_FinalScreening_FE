@@ -58,11 +58,11 @@ export default function ReviewsPage() {
           name="reviewType"
           className="w-50 rounded-xl"
         />
-        <div className="flex w-[390px] items-center gap-4">
-          <p className="text-content-secondary text-sm">
+        <div className="flex w-[390px] items-center gap-4 max-md:justify-end">
+          <p className="text-content-secondary text-sm max-md:hidden">
             최근 함께한 유저에게 리뷰를 남기려면
           </p>
-          <div className="h-px flex-1 bg-slate-500" />
+          <div className="h-px flex-1 bg-slate-500 max-md:hidden" />
           <Link href="/myprofile/find-history">
             <BoxButton
               tone="gradient_positive"
@@ -79,7 +79,7 @@ export default function ReviewsPage() {
       ) : (
         <div className="border-border-primary mt-8 w-full overflow-hidden rounded-xl border text-base">
           {/* Header */}
-          <div className="text-content-secondary bg-bg-primary grid h-13 grid-cols-[120px_200px_1fr_120px] items-center px-5">
+          <div className="text-content-secondary bg-bg-primary hidden h-13 grid-cols-[120px_200px_1fr_120px] items-center px-5 lg:grid">
             <span>평가</span>
             <span>유저 닉네임</span>
             <span>리뷰 내용</span>

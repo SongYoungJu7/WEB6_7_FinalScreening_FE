@@ -49,8 +49,8 @@ export default function FindDetailModal({
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 z-50 bg-black/60" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-123.5 -translate-x-1/2 -translate-y-1/2 rounded-md focus:outline-none max-lg:w-[80vw]">
-          <FormModalContainer className="text-content-primary w-142 max-md:w-100">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-123.5 -translate-x-1/2 -translate-y-1/2 rounded-md focus:outline-none max-lg:w-[85vw]">
+          <FormModalContainer className="text-content-primary w-142 max-md:w-118">
             <Dialog.Title className="mb-7.5 text-2xl font-bold">
               모집글 상세 정보
             </Dialog.Title>
