@@ -78,55 +78,70 @@ export default function FindHistoryCard({
     <div>
       <HorizontalCardContainer
         className={twMerge(
-          "flex w-full cursor-pointer items-center justify-between gap-3 text-left text-base",
+          "w-full cursor-pointer text-left",
           isOpen && "rounded-b-none",
         )}
       >
         <button
           type="button"
           onClick={handleToggle}
-          className="flex w-full cursor-pointer items-center justify-between gap-3 text-left text-base"
+          className="flex w-full flex-col items-start justify-between gap-3 text-left min-[1230px]:flex-row min-[1230px]:items-center"
         >
-          <Image
-            src={gameLogoSrc}
-            alt={`lol logo`}
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-md object-cover"
-          />
+          {/* 1) 상단: 로고 + 닉네임 + 상태(모바일은 같은 줄) */}
+          <div className="flex w-full items-center gap-3 min-[1230px]:w-auto">
+            <Image
+              src={gameLogoSrc}
+              alt="lol logo"
+              className="h-9 w-9 shrink-0 rounded-md object-cover"
+            />
 
-          {/* 커뮤니티 닉네임 + 내용 */}
-          <div className="flex w-50 items-center justify-between">
-            {" "}
-            <div className="flex shrink-0 items-center gap-2">
-              <Avatar
-                type="profile"
-                src={leader.profileImage}
-                alt="leader profile image"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
+            <div className="flex min-w-0 flex-1 items-center justify-between gap-2 min-[1230px]:w-50">
+              {/* 닉네임 */}
+              <div className="flex min-w-0 items-center gap-2">
+                <Avatar
+                  type="profile"
+                  src={leader.profileImage}
+                  alt="leader profile image"
+                  width={32}
+                  height={32}
+                  size="xs"
+                />
+                <span className="text-content-primary min-w-0 truncate text-sm">
+                  {leader.nickname}
+                </span>
+              </div>
 
-              <span className="text-content-primary max-w-25 overflow-hidden text-sm text-ellipsis whitespace-nowrap">
-                {leader.nickname}
-              </span>
+              {/* 상태 뱃지: 모바일에서도 보이게 */}
+              <div className="flex shrink-0 items-center gap-2">
+                <StateBadge
+                  state={status as PostStatus}
+                  className="w-20 text-xs"
+                />
+              </div>
             </div>
+          </div>
+
+          {/* 2) 제목: 모바일에서 아래로 내려가고 2줄까지 */}
+          <div className="w-full min-w-0 min-[1230px]:flex-1">
+            <IntroduceBubble
+              content={postTitle}
+              size="sm"
+              className="line-clamp-2 min-[1230px]:line-clamp-none min-[1230px]:truncate"
+            />
+          </div>
+
+          {/* 3) 하단: 큐 + 시간 + 화살표 (모바일은 한 줄) */}
+          <div className="text-content-secondary min-[1230px]lg:justify-end flex w-full items-center justify-between gap-3 text-xs min-[1230px]:w-auto">
             <span className="text-accent text-sm font-semibold">
               {QUEUE_TYPES_LABEL[queueType]}
             </span>
-          </div>
 
-          <IntroduceBubble content={postTitle} size="sm" />
-
-          <StateBadge state={status as PostStatus} className="w-20 text-xs" />
-
-          {/* 시간 + 화살표 */}
-          <div className="text-content-secondary flex w-17 items-center justify-end gap-1 text-xs">
-            <span>{formatRelativeTime(joinedAt)}</span>
-            <span className="text-base">
-              {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </span>
+            <div className="flex items-center gap-1">
+              <span className="shrink-0">{formatRelativeTime(joinedAt)}</span>
+              <span className="text-base">
+                {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </span>
+            </div>
           </div>
         </button>
       </HorizontalCardContainer>

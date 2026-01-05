@@ -14,11 +14,11 @@ export default function LinkGameIdBox() {
         <Link2Off size={36} className="text-accent" strokeWidth={3} />
       </div>
       <div className="space-y-2">
-        <p className="text-center text-[32px] font-semibold">
+        <p className="text-center text-[32px] font-semibold max-md:text-2xl">
           연동된 게임 아이디가 없습니다
         </p>
-        <p className="text-content-secondary text-center text-xl">
-          게임 아이디를 연동하여 프로필을 완성하고 듀오를 구해보세요
+        <p className="text-content-secondary text-center text-xl max-md:text-base">
+          게임 아이디를 연동해서 프로필을 완성하고 듀오를 구해보세요
         </p>
       </div>
       <BoxButton
@@ -26,6 +26,7 @@ export default function LinkGameIdBox() {
         size="lg"
         tone="gradient_positive"
         onClick={() => setIsOpen(true)}
+        className="max-md:h-13 max-md:text-base"
       />
       <LinkGameIdFormModal
         mode="link"

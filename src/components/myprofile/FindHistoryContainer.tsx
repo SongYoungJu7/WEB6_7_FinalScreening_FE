@@ -42,7 +42,7 @@ export default function FindHistoryContainer({
   }, [parties, status, isLeader]);
 
   return (
-    <div>
+    <div className="max-md:w-110">
       <div className="mb-5 flex items-center gap-2">
         <CircleBtn
           size="xs"

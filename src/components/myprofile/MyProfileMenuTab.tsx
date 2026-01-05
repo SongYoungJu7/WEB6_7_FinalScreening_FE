@@ -27,7 +27,7 @@ export default function MyProfileMenuTab({
       >
         <span
           className={twMerge(
-            "text-content-primary p-2 text-xl font-medium max-md:py-4 max-md:text-base",
+            "text-content-primary p-2 text-xl font-medium max-md:py-4 max-md:text-sm",
             isActive && "text-accent",
           )}
         >

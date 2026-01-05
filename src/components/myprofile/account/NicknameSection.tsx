@@ -142,9 +142,11 @@ export default function NicknameSection({
         {nicknameError && (
           <p className="text-negative ml-2 text-sm">{nicknameError}</p>
         )}
-        <div className="text-content-secondary flex items-center gap-2 text-base">
-          <CircleAlert size={18} />
-          <p>닉네임은 7일 단위로 변경할 수 있습니다</p>
+        <div className="text-content-secondary flex items-center gap-1 text-base">
+          <CircleAlert className="size-4.5 max-md:size-4" />
+          <p className="max-md:text-sm">
+            닉네임은 7일 단위로 변경할 수 있습니다
+          </p>
         </div>
       </div>
     </div>

@@ -30,7 +30,7 @@ interface StateBadgeProps
 export default function StateBadge({ state, className }: StateBadgeProps) {
   return (
     <div className={twMerge(stateBadgeVariant({ state }), className)}>
-      <span>
+      <span className="shrink-0">
         {state === "RECRUIT"
           ? "모집중"
           : state === "ACTIVE"

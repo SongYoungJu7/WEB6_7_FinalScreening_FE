@@ -125,8 +125,8 @@ export default function LinkGameIdFormModal({
       }}
     >
       <Dialog.Portal>
-        <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-black/60" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 max-h-[85vh] w-[90vw] max-w-123.5 -translate-x-1/2 -translate-y-1/2 rounded-md focus:outline-none">
+        <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 z-90 bg-black/60" />
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 z-90 max-h-[85vh] w-[90vw] max-w-123.5 -translate-x-1/2 -translate-y-1/2 rounded-md focus:outline-none">
           <FormModalContainer className="flex flex-col gap-7.5">
             <Dialog.Title className="text-2xl font-bold">
               게임 아이디 연동
@@ -208,8 +208,8 @@ export default function LinkGameIdFormModal({
                 )}
               </div>
 
-              <div className="text-negative flex items-center gap-2 text-base">
-                <CircleAlert size={18} />
+              <div className="text-negative flex items-center gap-1 text-base max-md:text-sm">
+                <CircleAlert className="size-4.5 max-md:size-4" />
                 <p>
                   타인의 아이디를 도용하는 경우 서비스 이용이 제한될 수 있습니다
                 </p>
