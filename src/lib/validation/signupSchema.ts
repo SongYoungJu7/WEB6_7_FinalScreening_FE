@@ -20,21 +20,7 @@ export const sendCodeSchema = z.object({
 });
 
 export const verifyCodeSchema = z.object({
-  email: z
-    .string()
-    .min(1, "이메일을 입력해주세요.")
-    .email("이메일 형식이 올바르지 않습니다."),
-  code: z
-    .string()
-    .min(1, "인증번호를 입력해주세요.")
-    .length(6, "인증번호 6자리를 입력해주세요.")
-    .refine(
-      (email) => {
-        const [id] = email.split("@");
-        return EmailIdSchema.safeParse(id).success;
-      },
-      { message: "이메일 아이디는 2글자 이상이어야 합니다." },
-    ),
+  code: z.string().length(6, "인증번호 6자리를 입력해주세요."),
 });
 
 export const signUpSchema = z
