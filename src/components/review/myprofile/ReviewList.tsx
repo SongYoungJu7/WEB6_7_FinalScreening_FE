@@ -28,7 +28,7 @@ export default function ReviewList({
           <span className="text-content-secondary text-base">
             총 {review.length}개의 리뷰
           </span>
-          <div className="space-y-2">
+          <div className="w-full space-y-2">
             {review.map((r, index) => (
               <ReviewCard
                 key={`${status} review${index}`}

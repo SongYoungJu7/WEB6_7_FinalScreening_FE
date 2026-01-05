@@ -87,7 +87,6 @@ export default function FindHistoryCard({
           onClick={handleToggle}
           className="flex w-full flex-col items-start justify-between gap-3 text-left min-[1230px]:flex-row min-[1230px]:items-center"
         >
-          {/* 1) 상단: 로고 + 닉네임 + 상태(모바일은 같은 줄) */}
           <div className="flex w-full items-center gap-3 min-[1230px]:w-auto">
             <Image
               src={gameLogoSrc}
@@ -96,7 +95,6 @@ export default function FindHistoryCard({
             />
 
             <div className="flex min-w-0 flex-1 items-center justify-between gap-2 min-[1230px]:w-50">
-              {/* 닉네임 */}
               <div className="flex min-w-0 items-center gap-2">
                 <Avatar
                   type="profile"
@@ -111,17 +109,14 @@ export default function FindHistoryCard({
                 </span>
               </div>
 
-              {/* 상태 뱃지: 모바일에서도 보이게 */}
               <div className="flex shrink-0 items-center gap-2">
-                <StateBadge
-                  state={status as PostStatus}
-                  className="w-20 text-xs"
-                />
+                <span className="text-accent text-sm font-semibold">
+                  {QUEUE_TYPES_LABEL[queueType]}
+                </span>
               </div>
             </div>
           </div>
 
-          {/* 2) 제목: 모바일에서 아래로 내려가고 2줄까지 */}
           <div className="w-full min-w-0 min-[1230px]:flex-1">
             <IntroduceBubble
               content={postTitle}
@@ -130,14 +125,11 @@ export default function FindHistoryCard({
             />
           </div>
 
-          {/* 3) 하단: 큐 + 시간 + 화살표 (모바일은 한 줄) */}
           <div className="text-content-secondary min-[1230px]lg:justify-end flex w-full items-center justify-between gap-3 text-xs min-[1230px]:w-auto">
-            <span className="text-accent text-sm font-semibold">
-              {QUEUE_TYPES_LABEL[queueType]}
-            </span>
+            <StateBadge state={status as PostStatus} className="w-20 text-xs" />
 
-            <div className="flex items-center gap-1">
-              <span className="shrink-0">{formatRelativeTime(joinedAt)}</span>
+            <div className="flex w-17 shrink-0 items-center justify-end gap-1">
+              <span>{formatRelativeTime(joinedAt)}</span>
               <span className="text-base">
                 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
               </span>
@@ -150,7 +142,6 @@ export default function FindHistoryCard({
           <HorizontalCardContainer
             className={isOpen && "rounded-t-none border-t-0"}
           >
-            {/* 하단 수정/삭제 영역 (작성한 리뷰 + 펼쳐진 상태에서만) */}
             <div className="space-y-4">
               <p className="text-sm font-bold">함께 플레이 한 유저</p>
               {members &&

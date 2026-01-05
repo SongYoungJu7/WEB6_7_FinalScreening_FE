@@ -43,7 +43,7 @@ export default function MyProfileReviewContainer({
       : (writtenReviewData ?? []);
 
   return (
-    <div>
+    <div className="max-md:w-110">
       <MyReviewFilterToggle
         value={status}
         onChange={setStatus}

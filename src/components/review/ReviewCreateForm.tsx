@@ -80,6 +80,18 @@ export default function ReviewCreateForm({
         return;
       }
 
+      await qc.invalidateQueries({
+        queryKey: ["ReviewDistribution"],
+      });
+
+      await qc.invalidateQueries({
+        queryKey: ["receivedReviews"],
+      });
+
+      await qc.invalidateQueries({
+        queryKey: ["writtenReviews"],
+      });
+
       showToast.success("리뷰가 등록되었습니다.");
 
       router.refresh();
