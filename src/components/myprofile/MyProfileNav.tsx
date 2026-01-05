@@ -4,22 +4,22 @@ import { useMenuStore, useMyProfileMenuStore } from "@/stores/menuStore";
 import MyProfileMenuTab from "./MyProfileMenuTab";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { twMerge } from "tailwind-merge";
 
 export default function MyProfileNav() {
   const { setMenu: setGnbMenu } = useMenuStore();
-  const { currentMenu, setMenu } = useMyProfileMenuStore();
-
-  const pathName = usePathname().split("/");
-  const newPath = `/${pathName[1]}/`;
+  const { currentMenu } = useMyProfileMenuStore();
 
   useEffect(() => {
     setGnbMenu("");
   }, []);
 
   return (
-    <nav className="flex min-w-55 flex-col gap-11">
-      <h1 className="text-content-main text-5xl font-bold">마이 프로필</h1>
-      <ul className="flex flex-col gap-5.5">
+    <nav className="max-md:bg-bg-primary flex min-w-55 flex-col gap-11 max-md:flex-row max-md:justify-center">
+      <h1 className="text-content-main text-5xl font-bold max-md:hidden">
+        마이 프로필
+      </h1>
+      <ul className="flex flex-col gap-5.5 max-md:flex-row max-md:gap-4">
         <MyProfileMenuTab
           path={`account`}
           text="계정 관리"
