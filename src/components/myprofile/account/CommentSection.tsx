@@ -13,6 +13,7 @@ export default function CommentSection({ initialComment }: CommentProps) {
   const [comment, setComment] = useState<string>("");
   const [tempComment, setTempComment] = useState<string>("");
   const [isCommentEditing, setIsCommentEditing] = useState<boolean>(false);
+  const [commentError, setCommentError] = useState<string>("");
 
   const commentInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,6 +29,7 @@ export default function CommentSection({ initialComment }: CommentProps) {
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (commentError) return;
     try {
       const res = await ClientApi("/api/v1/users/me/comment", {
         method: "PATCH",
@@ -58,10 +60,26 @@ export default function CommentSection({ initialComment }: CommentProps) {
             placeholder={comment}
             className="h-12 py-4 text-base"
           />
+          {commentError && <p className="ml-2 text-sm text-negative">{commentError}</p>}
           <div className="mt-[11px] mr-2 flex gap-4 self-end">
             <button
               type="submit"
               className="text-accent cursor-pointer hover:underline"
+              onClick={() => {
+                setCommentError("");
+                if (comment === tempComment) {
+                  setCommentError(
+                    "변경하려는 소개글이 현재 소개글과 동일합니다.",
+                  );
+                  return;
+                }
+                if (tempComment.length > 40) {
+                  setCommentError(
+                    "소개글은 40자 이하여야 합니다.",
+                  );
+                  return;
+                }
+              }}
             >
               저장
             </button>
@@ -81,7 +99,7 @@ export default function CommentSection({ initialComment }: CommentProps) {
         <div className="flex flex-col gap-2">
           {comment ? (
             <IntroduceBubble
-              content={comment ?? ""}
+              content={comment}
               type="message"
               className="text-sm"
             />
@@ -100,6 +118,7 @@ export default function CommentSection({ initialComment }: CommentProps) {
             onClick={() => {
               setTempComment(comment);
               setIsCommentEditing(true);
+              setCommentError("");
             }}
           />
         </div>
