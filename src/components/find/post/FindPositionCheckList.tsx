@@ -59,7 +59,7 @@ export default function FindPositionCheckList(
   };
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2.5 max-md:gap-1.5">
       {POSITION.map((p, index) =>
         p === "ANY" ? (
           <label key={index} className="cursor-pointer">
@@ -85,7 +85,10 @@ export default function FindPositionCheckList(
             />
           </label>
         ) : (
-          <label key={index} className="cursor-pointer">
+          <label
+            key={index}
+            className="flex shrink-0 cursor-pointer items-center"
+          >
             <input
               type="checkbox"
               aria-label={`${p} position`}
@@ -98,7 +101,8 @@ export default function FindPositionCheckList(
             <Image
               src={isChecked(p) ? activePositionIcons[p] : positionIcons[p]}
               alt={`${p} position icon`}
-              height={30}
+              width={p == "SUPPORT" ? 32 : 28}
+              height={p == "SUPPORT" ? 32 : 28}
             />
           </label>
         ),
