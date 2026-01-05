@@ -53,14 +53,22 @@ export default function FindMemberCard({
   if (PartyMemberData)
     return (
       <div className="bg-accent/10 border-accent/50 flex items-center justify-between rounded-xl border px-4 py-2">
-        <div className="flex items-center gap-2">
+        <div
+          className="group flex items-center gap-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/profile/${PartyMemberData.userId}`);
+          }}
+        >
           <Avatar
             type="profile"
             src={PartyMemberData.profileImage}
             size="sm"
             isBanned={isPartyMemberBanned}
           />
-          <h4 className="font-bold">{PartyMemberData.nickname}</h4>
+          <h4 className="group-hover:text-accent font-bold transition-all duration-150">
+            {PartyMemberData.nickname}
+          </h4>
           {banUsersListIsLoading && (
             <h4 className="">(차단 상태를 불러오는 중)</h4>
           )}
