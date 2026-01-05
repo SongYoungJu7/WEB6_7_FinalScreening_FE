@@ -26,7 +26,7 @@ export default function AccountPageContent() {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: getMyProfile,
   });
 
