@@ -11,6 +11,7 @@ import {
 } from "react";
 import dayjs from "dayjs";
 import { showToast } from "@/lib/toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface NicknameProps {
   initialNickname: string;
@@ -34,6 +35,8 @@ export default function NicknameSection({
 
   const nicknameInputRef = useRef<HTMLInputElement>(null);
 
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     setNickname(initialNickname);
   }, [initialNickname]);
@@ -45,8 +48,6 @@ export default function NicknameSection({
   }, [isNicknameEditing]);
 
   const handleNicknameModifyButtonClick = () => {
-    setModifyNickname(nickname ?? "");
-    setIsNicknameEditing(true);
     if (nicknameUpdatedAt) {
       const lastUpdate = dayjs(nicknameUpdatedAt);
       const now = dayjs();
@@ -60,6 +61,8 @@ export default function NicknameSection({
         return;
       }
     }
+    setModifyNickname(nickname ?? "");
+    setIsNicknameEditing(true);
   };
 
   const handleNicknameSubmit = async (e: React.FormEvent) => {
@@ -86,6 +89,7 @@ export default function NicknameSection({
           showToast.success("닉네임을 변경했습니다.");
           setNickname(modifyNickname);
           setIsNicknameEditing(false);
+          queryClient.invalidateQueries({ queryKey: ["user"] });
         } else {
           showToast.error("닉네임 변경에 실패했습니다.");
         }
