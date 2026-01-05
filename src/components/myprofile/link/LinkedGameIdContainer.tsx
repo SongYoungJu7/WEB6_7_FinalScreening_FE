@@ -25,7 +25,7 @@ export default function LinkedGameIdContainer({
   return (
     <div>
       {gameAccountData === null || gameAccountData?.length ? (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-5">
           <div className="space-y-2">
             {gameAccountData?.map((g, index) => (
               <LinkedGameIdCard key={index} gameAccountData={g} />
@@ -35,7 +35,7 @@ export default function LinkedGameIdContainer({
             text="새로운 아이디 연동"
             tone="color"
             size="lg"
-            className="self-center"
+            className="self-center max-md:h-13 max-md:text-base"
             onClick={() => setIsOpen(true)}
           />
           <LinkGameIdFormModal
