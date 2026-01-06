@@ -20,7 +20,14 @@ export const sendCodeSchema = z.object({
 });
 
 export const verifyCodeSchema = z.object({
-  code: z.string().length(6, "인증번호 6자리를 입력해주세요."),
+  email: z
+    .string()
+    .min(1, "이메일을 입력해주세요.")
+    .email("이메일 형식이 올바르지 않습니다."),
+  code: z
+    .string()
+    .min(1, "인증번호를 입력해주세요.")
+    .length(6, "인증번호 6자리를 입력해주세요."),
 });
 
 export const signUpSchema = z
