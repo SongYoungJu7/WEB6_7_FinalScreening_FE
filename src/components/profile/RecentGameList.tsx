@@ -49,10 +49,11 @@ export default function RecentGameList({
               key={c.matchId}
               className={twMerge(
                 "bg-negative/10 border-negative flex w-full justify-between rounded-xl border px-6 py-3",
+                "max-[960px]:flex-col max-[960px]:gap-3",
                 c.win && "bg-positive/10 border-positive",
               )}
             >
-              <div className="flex w-120 justify-between gap-10.5">
+              <div className="flex w-120 justify-between gap-10.5 max-lg:w-110">
                 {/* 게임 모드, 시간 */}
                 <div className="flex flex-col items-center justify-center gap-1">
                   <span
@@ -69,14 +70,14 @@ export default function RecentGameList({
                 </div>
 
                 {/* 챔피언, 룬, 스펠 */}
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex shrink-0 items-center justify-center gap-1">
                   <div className="relative inline-flex">
                     <Avatar
                       src={c.championImageUrl}
                       type="champion"
                       size="lg"
                     />
-                    <div className="absolute right-0 bottom-0 rounded-full bg-slate-800 p-1">
+                    <div className="absolute right-0 bottom-0 rounded-full bg-slate-800 px-2 py-1 text-sm text-white">
                       {c.level}
                     </div>
                   </div>
@@ -115,54 +116,54 @@ export default function RecentGameList({
                           className="rounded-full"
                         />
                       ) : (
-                        <div className="bg-bg-secondary w-7.5 rounded-full" />
+                        <div className="bg-bg-secondary h-7.5 w-7.5 rounded-full" />
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* KDA */}
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex shrink-0 flex-col items-center justify-center">
                   <p>
-                    {c.kills} /{" "}
-                    <span className="text-negative">{c.deaths}</span> /{" "}
-                    {c.assists}
+                    {c.kills} /<span className="text-negative">{c.deaths}</span>
+                    /{c.assists}
                   </p>
                   <p className="text-content-secondary text-sm font-medium">
                     {c.kda.toFixed(2)}
                   </p>
                 </div>
 
-                <span className="text-content-secondary flex items-center justify-center text-sm font-medium">
+                <span className="text-content-secondary flex shrink-0 items-center justify-center text-sm font-medium">
                   CS {c.cs}
                 </span>
               </div>
 
-              {/* 빌드 */}
-              <div className="flex items-center gap-1">
-                {c.itemImageUrls &&
-                  c.itemImageUrls.map((item, index) =>
-                    item ? (
-                      <Image
-                        key={`item${index}`}
-                        src={item}
-                        alt="item image"
-                        width={40}
-                        height={40}
-                      />
-                    ) : (
-                      <div key={`item${index}`} />
-                    ),
-                  )}
+              {/* 데스크탑: 빌드 */}
+              <div className="flex shrink-0 items-center gap-1 max-[960px]:hidden">
+                {c.itemImageUrls?.map((item, index) =>
+                  item ? (
+                    <Image
+                      key={`item${index}`}
+                      src={item}
+                      alt="item image"
+                      width={40}
+                      height={40}
+                    />
+                  ) : (
+                    <div
+                      key={`item${index}`}
+                      className="h-9 w-9 bg-slate-800"
+                    />
+                  ),
+                )}
               </div>
 
-              <div className="flex items-center justify-center gap-10.5">
-                {/* 시작 시간 */}
+              {/* 데스크탑: 시작시간 */}
+              <div className="flex shrink-0 items-center justify-center gap-10.5 max-[960px]:hidden">
                 <span className="text-content-secondary text-sm">
                   {c.gameStartTimeFormatted}
                 </span>
 
-                {/* 승리/패배 뱃지 */}
                 <div
                   className={twMerge(
                     "text-negative bg-negative/10 border-negative inline-flex h-8 items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium",
@@ -170,6 +171,44 @@ export default function RecentGameList({
                   )}
                 >
                   <span>{c.win ? "승리" : "패배"}</span>
+                </div>
+              </div>
+
+              <div className="hidden w-full items-center justify-between gap-3 max-[960px]:flex">
+                {/* 빌드 */}
+                <div className="flex min-w-0 flex-1 items-center gap-1">
+                  {c.itemImageUrls?.map((item, index) =>
+                    item ? (
+                      <Image
+                        key={`item${index}`}
+                        src={item}
+                        alt="item image"
+                        width={36}
+                        height={36}
+                      />
+                    ) : (
+                      <div
+                        key={`item${index}`}
+                        className="h-9 w-9 bg-slate-800"
+                      />
+                    ),
+                  )}
+                </div>
+
+                {/* 시작시간 + 승패 */}
+                <div className="flex shrink-0 items-center gap-3">
+                  <span className="text-content-secondary text-xs">
+                    {c.gameStartTimeFormatted}
+                  </span>
+
+                  <div
+                    className={twMerge(
+                      "text-negative bg-negative/10 border-negative inline-flex h-7 items-center justify-center rounded-xl border px-3 text-xs font-medium",
+                      c.win && "text-positive border-positive bg-positive/10",
+                    )}
+                  >
+                    <span>{c.win ? "승리" : "패배"}</span>
+                  </div>
                 </div>
               </div>
             </div>

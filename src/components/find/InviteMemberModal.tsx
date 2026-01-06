@@ -91,6 +91,9 @@ export default function InviteMemberModal({
                     await qc.invalidateQueries({
                       queryKey: [postId, "party"],
                     });
+                    await qc.invalidateQueries({
+                      queryKey: [postId, "posts"],
+                    });
 
                     router.refresh();
                   }}

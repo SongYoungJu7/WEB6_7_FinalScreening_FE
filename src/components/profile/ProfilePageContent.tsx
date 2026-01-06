@@ -262,9 +262,9 @@ export default function ProfilePageContent({
               ) : (
                 <>
                   {/* 랭크 및 승률 정보 */}
-                  <div className="m-auto grid w-[90%] grid-cols-[1fr_1fr_1fr] gap-5">
-                    <HorizontalCardContainer className="flex flex-col items-center justify-center gap-2 border-none px-12 py-6">
-                      <p className="text-semibold text-xl">
+                  <div className="m-auto grid w-[90%] grid-cols-[1fr_1fr_1fr] gap-5 max-[960px]:grid-cols-[1fr_1fr] max-[960px]:[&>*:last-child]:col-span-2">
+                    <HorizontalCardContainer className="flex flex-col items-center justify-center gap-2 border-none px-12 py-6 max-md:px-10">
+                      <p className="text-semibold text-xl max-lg:text-lg">
                         개인/2인 랭크 게임
                       </p>
                       <div className="flex flex-col">
@@ -276,7 +276,9 @@ export default function ProfilePageContent({
                       </div>
                     </HorizontalCardContainer>
                     <HorizontalCardContainer className="flex flex-col items-center justify-center gap-2 border-none px-12 py-6">
-                      <p className="text-semibold text-xl">자유 랭크 게임</p>
+                      <p className="text-semibold text-xl max-lg:text-lg">
+                        자유 랭크 게임
+                      </p>
                       <div className="flex flex-col">
                         {FlexQueue ? (
                           <TierSet tier={FlexQueue.tier} rank="I" />
@@ -286,8 +288,10 @@ export default function ProfilePageContent({
                       </div>
                     </HorizontalCardContainer>
                     <HorizontalCardContainer className="flex flex-col items-center justify-center gap-3 border-none px-12 py-6">
-                      <p className="text-semibold text-xl">승률</p>
-                      <div className="flex h-full flex-col items-center justify-center">
+                      <p className="text-semibold text-xl max-lg:text-lg">
+                        승률
+                      </p>
+                      <div className="flex h-full items-center justify-center gap-2">
                         {RankData && RankData.length !== 0 ? (
                           RankData.map((r, index) => (
                             <div
@@ -313,6 +317,21 @@ export default function ProfilePageContent({
                             승률 데이터가 없습니다
                           </p>
                         )}
+                        <div
+                          key={`RankData${1}`}
+                          className="flex flex-col items-center"
+                        >
+                          <p className="text-content-secondary text-sm">
+                            "자유 랭크"
+                          </p>
+                          <WinRate
+                            type="donut"
+                            className="w-25"
+                            winRate={10}
+                            win={10}
+                            lose={30}
+                          />
+                        </div>
                       </div>
                     </HorizontalCardContainer>
                   </div>
@@ -393,7 +412,7 @@ export default function ProfilePageContent({
                 <p className="text-content-secondary text-center text-base">
                   총 {receivedReviewData.length}개의 리뷰
                 </p>
-                <div className="flex w-[70%] flex-col gap-2">
+                <div className="flex w-[80%] flex-col gap-2 max-md:w-full">
                   {receivedReviewData.map((r, index) => (
                     <ReviewCard
                       key={`review${index}`}
