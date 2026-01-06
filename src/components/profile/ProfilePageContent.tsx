@@ -324,21 +324,6 @@ export default function ProfilePageContent({
                             승률 데이터가 없습니다
                           </p>
                         )}
-                        <div
-                          key={`RankData${1}`}
-                          className="flex flex-col items-center"
-                        >
-                          <p className="text-content-secondary text-sm">
-                            "자유 랭크"
-                          </p>
-                          <WinRate
-                            type="donut"
-                            className="w-25"
-                            winRate={10}
-                            win={10}
-                            lose={30}
-                          />
-                        </div>
                       </div>
                     </HorizontalCardContainer>
                   </div>
