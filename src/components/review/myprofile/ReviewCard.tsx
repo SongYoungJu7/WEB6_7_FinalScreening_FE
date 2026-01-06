@@ -138,7 +138,7 @@ export default function ReviewCard({
         <div className="min-w-0 flex-1 max-lg:w-full">
           <IntroduceBubble
             content={content}
-            className="max-lg:truncate-none min-w-[clamp(180px,32vw,520px)] flex-1 truncate max-lg:line-clamp-2 max-lg:min-w-0"
+            className="max-lg:truncate-none w-full flex-1 truncate max-lg:line-clamp-2 max-lg:min-w-0"
           />
         </div>
 
