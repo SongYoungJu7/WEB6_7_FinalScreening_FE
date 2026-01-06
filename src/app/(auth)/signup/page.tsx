@@ -11,7 +11,7 @@ export default function page() {
             회원가입
           </p>
           <p className="text-content-secondary text-center text-lg max-md:text-base">
-            지금 가입하고 매치마이파티와 함께해요
+            지금 가입하고 매치마이듀오와 함께해요
           </p>
         </div>
         <SignUpForm />
