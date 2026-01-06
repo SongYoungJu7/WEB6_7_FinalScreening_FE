@@ -102,7 +102,7 @@ export default function PasswordSection() {
             </button>
           }
         />
-        {passwordError && <span className="ml-2">{passwordError}</span>}
+        {passwordError && <span className="ml-2 text-sm text-negative">{passwordError}</span>}
         <BoxButton
           text="수정"
           tone="color"
