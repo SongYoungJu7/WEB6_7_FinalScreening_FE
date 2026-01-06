@@ -128,7 +128,7 @@ export default function FindHistoryCard({
           <div className="text-content-secondary min-[1230px]lg:justify-end flex w-full items-center justify-between gap-3 text-xs min-[1230px]:w-auto">
             <StateBadge state={status as PostStatus} className="w-20 text-xs" />
 
-            <div className="flex w-17 shrink-0 items-center justify-end gap-1">
+            <div className="flex w-17 shrink-0 cursor-pointer items-center justify-end gap-1">
               <span>{formatRelativeTime(joinedAt)}</span>
               <span className="text-base">
                 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -171,7 +171,8 @@ export default function FindHistoryCard({
                         <BoxButton
                           text="리뷰 작성"
                           size="xs"
-                          className="bg-accent text-xs"
+                          tone="color"
+                          className="text-xs"
                           onClick={() => {
                             setInitialData({
                               nickName: m.nickname,
