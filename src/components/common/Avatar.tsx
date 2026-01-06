@@ -49,7 +49,7 @@ export default function Avatar({
     >
       {src === "" ? (
         <Image
-          className="size-full rounded-[inherit] object-cover"
+          className="size-full rounded-full object-cover"
           src={profile}
           alt={
             type === "profile"
@@ -59,7 +59,7 @@ export default function Avatar({
         />
       ) : (
         <RadixAvatar.Image
-          className="size-full rounded-[inherit] object-cover"
+          className="size-full rounded-full object-cover"
           src={src}
           alt={
             type === "profile"
@@ -77,11 +77,15 @@ export default function Avatar({
               ? "user profile default image"
               : "champion thumbnail default image"
           }
+          className="rounded-full"
         />
       </RadixAvatar.Fallback>
       {isBanned && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/60">
-          <Ban className="w-full h-full text-red-500 opacity-50" strokeWidth={4} />
+          <Ban
+            className="h-full w-full text-red-500 opacity-50"
+            strokeWidth={4}
+          />
         </div>
       )}
     </RadixAvatar.Root>
