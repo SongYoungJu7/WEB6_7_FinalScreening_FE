@@ -76,7 +76,6 @@ export default function FindMemberCard({
         {PartyMemberData.role === "LEADER" ? (
           <Crown size={18} strokeWidth={3} className="text-accent" />
         ) : (
-          type === "default" &&
           isLeader && (
             <CircleBtn
               className="bg-negative hover:bg-negative/50 h-5 w-5"
