@@ -32,7 +32,7 @@ export default function FindMemberCard({
   currentCount,
   maxCount,
 }: FindMemberCardProps) {
-  const { openInviteForm } = useInviteStore();
+  const { openInviteForm, closeInviteForm } = useInviteStore();
   const router = useRouter();
   const qc = useQueryClient();
 
@@ -70,13 +70,12 @@ export default function FindMemberCard({
             {PartyMemberData.nickname}
           </h4>
           {banUsersListIsLoading && (
-            <h4 className="">(차단 상태를 불러오는 중)</h4>
+            <span className="text-sm">(차단 상태를 불러오는 중)</span>
           )}
         </div>
         {PartyMemberData.role === "LEADER" ? (
           <Crown size={18} strokeWidth={3} className="text-accent" />
         ) : (
-          type === "default" &&
           isLeader && (
             <CircleBtn
               className="bg-negative hover:bg-negative/50 h-5 w-5"
@@ -86,11 +85,22 @@ export default function FindMemberCard({
                   partyId: partyId,
                   memberId: PartyMemberData.partyMemberId,
                 });
-
+                await qc.invalidateQueries({
+                  queryKey: ["me", "parties"],
+                });
+                await qc.invalidateQueries({
+                  queryKey: [postId, "candidates"],
+                });
+                await qc.invalidateQueries({
+                  queryKey: [postId, "PartyMembers"],
+                });
                 await qc.invalidateQueries({
                   queryKey: [postId, "party"],
                 });
-
+                await qc.invalidateQueries({
+                  queryKey: [postId, "posts"],
+                });
+                closeInviteForm();
                 router.refresh();
               }}
             >
